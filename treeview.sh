@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 # Config
-ROOT="."
-README="README.md"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$SCRIPT_DIR"
+README="$SCRIPT_DIR/README.md"
 [ -n "$1" ] && ROOT="$1"
 [ -n "$2" ] && README="$2"
 
@@ -10,8 +11,12 @@ START_TAG="<!-- Tree Start -->"
 END_TAG="<!-- Tree End"
 END_MARKER="<!-- Tree End -->"
 
-# 1. Generate the clean tree
-TREE_CONTENT=$(tree -d -L 5 -I 'node_modules|.git|CMakeFiles|build|.pio' "$ROOT")
+# 1. Generate the clean tree with the project directory as its root
+ROOT="$(cd -- "$ROOT" && pwd)"
+TREE_CONTENT=$(
+    cd -- "$(dirname -- "$ROOT")"
+    tree -d -L 7 -I 'node_modules|.git|CMakeFiles|build|.pio' "$(basename -- "$ROOT")"
+)
 
 # 2. Extract the README content outside the tree block
 TEMP_HEADER=$(mktemp)
