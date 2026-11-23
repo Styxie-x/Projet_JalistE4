@@ -11,7 +11,7 @@ public class Repl {
     private boolean shell_status = false;
     private String input;
     private Scanner scanner;
-    private Map<String, Metacommand> metacommand = new HashMap<>();
+    private final Map<String, Metacommand> metacommand = new HashMap<>();
 
 
 
@@ -46,11 +46,11 @@ public class Repl {
             return false;
         }
     }
-    public void evaluate(String metaC) {
-        Metacommand mc = metacommand.get(metaC); // Si cri vaut "miaou", 'a' devient le Chat. Sinon 'a' vaut null.
+    public void evaluate(String input) {
+        Metacommand mc = metacommand.get(input); // Si cri vaut "miaou", 'a' devient le Chat. Sinon 'a' vaut null.
 
         if (mc != null) {
-            mc.execute();
+            mc.execute(input);
         }
 
     }
