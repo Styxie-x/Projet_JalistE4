@@ -1,5 +1,6 @@
 package fr.esiee.eisc;
 
+import fr.esiee.eisc.metacommand.Help;
 import fr.esiee.eisc.metacommand.Metacommand;
 import fr.esiee.eisc.metacommand.Quit;
 
@@ -18,6 +19,7 @@ public class Repl {
 
     public Repl() {
             metacommand.put("/quit", new Quit(this));
+            metacommand.put("/help", new Help(metacommand));
     }
 
     public void start(){
@@ -25,7 +27,7 @@ public class Repl {
         System.out.println("==========================================");
         System.out.println("   JaList REPL v1.0 - List & String Shell ");
         System.out.println("   Commands: /help  |  Exit: /quit        ");
-        System.out.println("==========================================");
+        System.out.println("======================Map====================");
 
         scanner = new Scanner(System.in);
         while(shell_status){
@@ -47,10 +49,15 @@ public class Repl {
         }
     }
     public void evaluate(String input) {
-        Metacommand mc = metacommand.get(input); // Si cri vaut "miaou", 'a' devient le Chat. Sinon 'a' vaut null.
-
-        if (mc != null) {
-            mc.execute(input);
+        if(input.contains("/"))
+        {
+            input.trim().split("\\s+", 2);
+            Metacommand mc = metacommand.get(input);
+            if (mc != null) {
+                mc.execute(input);
+            }
+        } else if (input.contains("$")) {
+            
         }
 
     }
@@ -63,8 +70,5 @@ public class Repl {
         shell_status = false;
 
     }
-
-
-
 
 }

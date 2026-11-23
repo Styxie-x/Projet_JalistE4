@@ -5,12 +5,6 @@ package fr.esiee.eisc;
 public class Main {
     public static void main(String[] args) {
         Repl monShell = new Repl();
-
-
-
         monShell.start();
-
-
-
     }
 }
