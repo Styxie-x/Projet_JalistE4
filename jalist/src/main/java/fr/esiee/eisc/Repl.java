@@ -1,13 +1,23 @@
 package fr.esiee.eisc;
 
+import fr.esiee.eisc.metacommand.Metacommand;
+import fr.esiee.eisc.metacommand.Quit;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Repl {
     private boolean shell_status = false;
     private String input;
     private Scanner scanner;
-    public Repl() {
+    private Map<String, Metacommand> metacommand = new HashMap<>();
 
+
+
+
+    public Repl() {
+            metacommand.put("/quit", new Quit(this));
     }
 
     public void start(){
@@ -36,15 +46,25 @@ public class Repl {
             return false;
         }
     }
-    public void evaluate(String args) {
+    public void evaluate(String metaC) {
+        Metacommand mc = metacommand.get(metaC); // Si cri vaut "miaou", 'a' devient le Chat. Sinon 'a' vaut null.
+
+        if (mc != null) {
+            mc.execute();
+        }
 
     }
     public void print(){
         System.out.println(input);
     }
+
     public void end(){
         scanner.close();
         shell_status = false;
 
     }
+
+
+
+
 }

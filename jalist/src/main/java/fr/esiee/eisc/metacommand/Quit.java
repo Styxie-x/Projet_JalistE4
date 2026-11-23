@@ -6,7 +6,7 @@ public class Quit implements Metacommand {
     private final Repl repl;
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
         repl.end();
     }
 
