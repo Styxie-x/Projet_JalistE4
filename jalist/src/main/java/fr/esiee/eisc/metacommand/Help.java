@@ -27,12 +27,13 @@ public class Help implements Metacommand {
     @Override
     public void getDetailedHelp() {
         this.getShortHelp();
+        System.out.println("    Usage : /help <command>: displays help of command");
+
     }
 
     @Override
     public void getShortHelp() {
         System.out.println("/help : display help of all available commands");
-        System.out.println("/help <command>: display help of command");
     }
 
     public Help(Map<String, Metacommand> arg_mc){

@@ -13,7 +13,9 @@ public class Quit implements Metacommand {
     }
 
     @Override
-    public void getDetailedHelp() {    }
+    public void getDetailedHelp() {
+        System.out.println("/quit : Quit REPL terminal");
+    }
 
     @Override
     public void getShortHelp() {

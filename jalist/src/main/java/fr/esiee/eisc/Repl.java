@@ -27,7 +27,7 @@ public class Repl {
         System.out.println("==========================================");
         System.out.println("   JaList REPL v1.0 - List & String Shell ");
         System.out.println("   Commands: /help  |  Exit: /quit        ");
-        System.out.println("======================Map====================");
+        System.out.println("==========================================");
 
         scanner = new Scanner(System.in);
         while(shell_status){
@@ -49,20 +49,28 @@ public class Repl {
         }
     }
     public void evaluate(String input) {
-        if(input.contains("/"))
+        if(input.trim().startsWith("/"))
         {
-            input.trim().split("\\s+", 2);
-            Metacommand mc = metacommand.get(input);
-            if (mc != null) {
-                mc.execute(input);
+            String[] parts = input.trim().split("\\s+", 2);
+
+            Metacommand mc = metacommand.get(parts[0]);
+            if((parts.length == 1)){
+                if (mc != null) {
+                    mc.execute(null);
+                }
+            } else {
+                if (mc != null) {
+                    mc.execute(parts[1]);
+                }
             }
         } else if (input.contains("$")) {
+
             
         }
 
     }
     public void print(){
-        System.out.println(input);
+        System.out.println();
     }
 
     public void end(){
